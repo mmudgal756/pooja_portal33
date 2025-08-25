@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import {
@@ -20,25 +20,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Edit, Trash, PlusCircle } from "lucide-react"
-
-const initialProducts = [
-  {
-    title: 'Havan Samagri Kit',
-    description: 'A complete kit with all essential items for performing a sacred Havan at home.',
-    price: '499',
-  },
-  {
-    title: 'Premium Agarbatti',
-    description: 'Aromatic incense sticks to create a divine and peaceful atmosphere during your puja.',
-    price: '149',
-  },
-  {
-    title: 'Natural Dhoop Batti',
-    description: 'Pure and natural incense cones for a long-lasting and soothing fragrance.',
-    price: '199',
-  },
-];
+import { Edit, Trash, PlusCircle, Loader2 } from "lucide-react"
+import { getProducts, addProduct, updateProduct, deleteProduct } from "@/services/pujaProducts"
 
 function ProductForm({ product, onSave, onCancel }) {
   const [formData, setFormData] = useState(product || { title: '', description: '', price: '' });
@@ -76,22 +59,49 @@ function ProductForm({ product, onSave, onCancel }) {
 }
 
 export default function ProductManagement() {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  const handleSave = (productData) => {
-    if (editingProduct) {
-      setProducts(products.map(p => p.title === editingProduct.title ? productData : p));
-    } else {
-      setProducts([...products, { ...productData, price: productData.price }]);
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
-    setIsDialogOpen(false);
-    setEditingProduct(null);
+    loadProducts();
+  }, []);
+
+  const handleSave = async (productData) => {
+    try {
+        if (editingProduct) {
+            const updated = await updateProduct(editingProduct.id, { ...productData, price: Number(productData.price) });
+            setProducts(products.map(p => p.id === editingProduct.id ? updated : p));
+        } else {
+            const newProduct = await addProduct({ ...productData, price: Number(productData.price) });
+            setProducts([...products, newProduct]);
+        }
+    } catch(error) {
+        console.error("Failed to save product:", error);
+    } finally {
+        setIsDialogOpen(false);
+        setEditingProduct(null);
+    }
   };
 
-  const handleDelete = (productTitle) => {
-    setProducts(products.filter(p => p.title !== productTitle));
+  const handleDelete = async (productId) => {
+    try {
+        await deleteProduct(productId);
+        setProducts(products.filter(p => p.id !== productId));
+    } catch(error) {
+        console.error("Failed to delete product:", error);
+    }
   };
   
   const handleAddNew = () => {
@@ -117,31 +127,37 @@ export default function ProductManagement() {
         </Button>
       </CardHeader>
       <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Price</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {products.map((product) => (
-              <TableRow key={product.title}>
-                <TableCell className="font-medium">{product.title}</TableCell>
-                <TableCell>₹{product.price}</TableCell>
-                <TableCell className="text-right">
-                  <Button variant="ghost" size="icon" onClick={() => handleEdit(product)}>
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon" onClick={() => handleDelete(product.title)}>
-                    <Trash className="h-4 w-4" />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        {isLoading ? (
+            <div className="flex justify-center items-center py-8">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        ) : (
+            <Table>
+            <TableHeader>
+                <TableRow>
+                <TableHead>Title</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {products.map((product) => (
+                <TableRow key={product.id}>
+                    <TableCell className="font-medium">{product.title}</TableCell>
+                    <TableCell>₹{product.price}</TableCell>
+                    <TableCell className="text-right">
+                    <Button variant="ghost" size="icon" onClick={() => handleEdit(product)}>
+                        <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleDelete(product.id)}>
+                        <Trash className="h-4 w-4" />
+                    </Button>
+                    </TableCell>
+                </TableRow>
+                ))}
+            </TableBody>
+            </Table>
+        )}
       </CardContent>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent>
