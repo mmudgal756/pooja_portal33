@@ -7,8 +7,8 @@ const pujaServices = [
     price: 5100,
     image: {
       src: 'https://placehold.co/600x400.png',
-      alt: 'Satyanarayan Katha setup',
-      aiHint: 'hindu ceremony'
+      alt: 'A family performing Satyanarayan Katha with a pandit.',
+      aiHint: 'hindu prayer'
     },
   },
   {
@@ -17,8 +17,8 @@ const pujaServices = [
     price: 3100,
     image: {
       src: 'https://placehold.co/600x400.png',
-      alt: 'Mundan ceremony',
-      aiHint: 'baby haircut'
+      alt: 'A baby during a Mundan ceremony with a pandit.',
+      aiHint: 'hindu ceremony'
     },
   },
   {
@@ -27,7 +27,7 @@ const pujaServices = [
     price: 4100,
     image: {
       src: 'https://placehold.co/600x400.png',
-      alt: 'Janeu ceremony',
+      alt: 'A young boy during his Janeu (sacred thread) ceremony.',
       aiHint: 'sacred thread'
     },
   },
@@ -37,8 +37,38 @@ const pujaServices = [
     price: 7100,
     image: {
       src: 'https://placehold.co/600x400.png',
-      alt: 'Grah Pravesh Pooja',
+      alt: 'A couple performing Grah Pravesh pooja at their new home entrance.',
       aiHint: 'housewarming ceremony'
+    },
+  },
+  {
+    title: 'Vivah Sanskar',
+    description: 'A beautiful wedding ceremony conducted by our expert pandits, following all the sacred traditions.',
+    price: 15100,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'A bride and groom during a traditional Hindu wedding ceremony.',
+      aiHint: 'indian wedding'
+    },
+  },
+  {
+    title: 'Naamkaran',
+    description: 'The naming ceremony for your newborn, a joyous occasion to officially welcome them into the family.',
+    price: 3500,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Parents with their newborn during a Naamkaran ceremony.',
+      aiHint: 'baby naming'
+    },
+  },
+  {
+    title: 'Vahan Pooja',
+    description: 'Bless your new vehicle with a Vahan Pooja to ensure safety and good fortune on the road.',
+    price: 2100,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'A person performing a pooja for their new car.',
+      aiHint: 'car blessing'
     },
   },
 ];
