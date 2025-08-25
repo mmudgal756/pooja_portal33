@@ -8,7 +8,7 @@ let products = [
     description: 'A complete kit with all essential items for performing a sacred Havan at home.',
     price: 499,
     image: {
-      src: 'https://storage.googleapis.com/maker-studio-5f404.appspot.com/user-styles/f475f3a09a564010b9f1d07c390a7863/Pu_uTz9hBwx6P6rZ.png',
+      src: './src/assets/images/HavanSamagriKit.png',
       alt: 'Havan Samagri Kit',
       aiHint: 'havan samagri'
     }
