@@ -10,7 +10,7 @@ export default function SamagriCard({ title, description, price, image }) {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
-    const priceValue = parseFloat(price.replace('₹', ''));
+    const priceValue = parseFloat(price);
     addToCart({ title, price: priceValue, image, description });
   };
 

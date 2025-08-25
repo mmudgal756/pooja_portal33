@@ -1,70 +1,9 @@
 import SamagriCard from '@/components/shared/SamagriCard';
+import { getProducts } from '@/services/pujaProducts';
 
-const samagriItems = [
-  {
-    title: 'Havan Samagri Kit',
-    description: 'A complete kit with all essential items for performing a sacred Havan at home.',
-    price: '499',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      alt: 'Havan Samagri',
-      aiHint: 'fire ritual'
-    },
-  },
-  {
-    title: 'Premium Agarbatti',
-    description: 'Aromatic incense sticks to create a divine and peaceful atmosphere during your puja.',
-    price: '149',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      alt: 'Agarbatti sticks',
-      aiHint: 'incense sticks'
-    },
-  },
-  {
-    title: 'Natural Dhoop Batti',
-    description: 'Pure and natural incense cones for a long-lasting and soothing fragrance.',
-    price: '199',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      alt: 'Dhoop Batti cones',
-      aiHint: 'incense cones'
-    },
-  },
-  {
-    title: 'Pure Ganga Jal',
-    description: 'Sacred water from the Ganges, essential for purification rituals and offerings.',
-    price: '99',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      alt: 'Ganga Jal in a bottle',
-      aiHint: 'holy water'
-    },
-  },
-  {
-    title: 'Brass Diya Set',
-    description: 'Set of two beautifully crafted brass diyas to illuminate your sacred space.',
-    price: '299',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      alt: 'Brass oil lamps',
-      aiHint: 'oil lamps'
-    },
-  },
-  {
-    title: 'Puja Thali Set',
-    description: 'A complete puja thali set in decorative steel, including all necessary items.',
-    price: '799',
-    image: {
-      src: 'https://placehold.co/600x400.png',
-      alt: 'Decorative Puja Thali',
-      aiHint: 'prayer platter'
-    },
-  },
-];
-
-
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const samagriItems = await getProducts();
+  
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <section>
@@ -73,8 +12,18 @@ export default function ProductsPage() {
           <p className="text-center text-muted-foreground max-w-2xl mx-auto">All you need for your rituals, delivered to your doorstep. High-quality items for an authentic experience.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {samagriItems.map((item, index) => (
-            <SamagriCard key={index} {...item} />
+          {samagriItems.map((item) => (
+            <SamagriCard 
+              key={item.id} 
+              title={item.title}
+              description={item.description}
+              price={item.price}
+              image={{
+                src: 'https://placehold.co/600x400.png',
+                alt: item.title,
+                aiHint: 'prayer platter' // A default hint, can be improved
+              }}
+            />
           ))}
         </div>
       </section>
