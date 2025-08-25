@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogIn, LogOut, User, ShoppingCart } from 'lucide-react';
+import { LogIn, LogOut, User, ShoppingCart, Package } from 'lucide-react';
 import { Logo } from '@/components/shared/Logo';
 import { useCart } from '@/context/CartContext';
 import Cart from '@/components/shared/Cart';
@@ -29,6 +29,12 @@ export default function Header() {
           <span className="text-xl font-bold font-headline text-primary-foreground-dark">Puja Portal</span>
         </Link>
         <div className="flex items-center gap-4">
+          <Button variant="ghost" asChild>
+            <Link href="/products">
+                <Package className="mr-2 h-4 w-4" />
+                Our Products
+            </Link>
+          </Button>
           <Button variant="ghost" size="icon" className="relative" onClick={() => setIsCartOpen(true)}>
             <ShoppingCart className="h-5 w-5" />
             {itemCount > 0 && (
