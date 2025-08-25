@@ -36,48 +36,52 @@ export default function BookingForm({ serviceTitle, servicePrice }) {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-4 py-4">
-      <div className="grid gap-2">
-        <Label>Service</Label>
-        <p className="text-sm font-medium">{serviceTitle}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid gap-2">
+          <Label>Service</Label>
+          <p className="text-sm font-medium">{serviceTitle}</p>
+        </div>
+        <div className="grid gap-2">
+          <Label>Pandit Service Charge</Label>
+          <p className="text-sm font-medium">₹{servicePrice}</p>
+        </div>
       </div>
-      <div className="grid gap-2">
-        <Label>Pandit Service Charge</Label>
-        <p className="text-sm font-medium">₹{servicePrice}</p>
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="date">Date</Label>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-full justify-start text-left font-normal",
-                !date && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {date ? format(date, "PPP") : <span>Pick a date</span>}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={setDate}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-      </div>
-       <div className="grid gap-2">
-        <Label htmlFor="time">Time</Label>
-        <Input 
-            id="time" 
-            type="time" 
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required 
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid gap-2">
+          <Label htmlFor="date">Date</Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-full justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {date ? format(date, "PPP") : <span>Pick a date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+         <div className="grid gap-2">
+          <Label htmlFor="time">Time</Label>
+          <Input 
+              id="time" 
+              type="time" 
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required 
+          />
+        </div>
       </div>
       <div className="grid gap-2">
         <Label htmlFor="location">Location</Label>

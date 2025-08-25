@@ -35,7 +35,7 @@ export default function PujaServiceCard({ title, description, image, price }) {
               Book Pandit
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-md">
             <DialogHeader>
               <DialogTitle>Book a Pandit for {title}</DialogTitle>
             </DialogHeader>
