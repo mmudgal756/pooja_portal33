@@ -7,36 +7,66 @@ let products = [
     title: 'Havan Samagri Kit',
     description: 'A complete kit with all essential items for performing a sacred Havan at home.',
     price: 499,
+    image: {
+      src: 'https://storage.googleapis.com/maker-studio-5f404.appspot.com/user-styles/f475f3a09a564010b9f1d07c390a7863/Pu_uTz9hBwx6P6rZ.png',
+      alt: 'Havan Samagri Kit',
+      aiHint: 'havan samagri'
+    }
   },
   {
     id: 2,
     title: 'Premium Agarbatti',
     description: 'Aromatic incense sticks to create a divine and peaceful atmosphere during your puja.',
     price: 149,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Premium Agarbatti',
+      aiHint: 'incense sticks'
+    }
   },
   {
     id: 3,
     title: 'Natural Dhoop Batti',
     description: 'Pure and natural incense cones for a long-lasting and soothing fragrance.',
     price: 199,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Natural Dhoop Batti',
+      aiHint: 'incense cones'
+    }
   },
    {
     id: 4,
     title: 'Pure Ganga Jal',
     description: 'Sacred water from the Ganges, essential for purification rituals and offerings.',
     price: 99,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Pure Ganga Jal',
+      aiHint: 'holy water'
+    }
   },
   {
     id: 5,
     title: 'Brass Diya Set',
     description: 'Set of two beautifully crafted brass diyas to illuminate your sacred space.',
     price: 299,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Brass Diya Set',
+      aiHint: 'brass lamp'
+    }
   },
   {
     id: 6,
     title: 'Puja Thali Set',
     description: 'A complete puja thali set in decorative steel, including all necessary items.',
     price: 799,
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Puja Thali Set',
+      aiHint: 'prayer platter'
+    }
   },
 ];
 
@@ -57,14 +87,15 @@ export async function getProduct(id) {
 
 export async function addProduct(product) {
   await delay(500);
-  const newProduct = { id: nextId++, ...product };
+  const newProduct = { id: nextId++, ...product, image: { src: 'https://placehold.co/600x400.png', alt: product.title, aiHint: 'pooja item' } };
   products.push(newProduct);
   return newProduct;
 }
 
 export async function updateProduct(id, updatedProduct) {
   await delay(500);
-  products = products.map(p => (p.id === id ? { ...p, ...updatedProduct, id } : p));
+  const existingProduct = products.find(p => p.id === id);
+  products = products.map(p => (p.id === id ? { ...existingProduct, ...updatedProduct, id } : p));
   return getProduct(id);
 }
 

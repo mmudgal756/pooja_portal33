@@ -18,11 +18,7 @@ export default async function ProductsPage() {
               title={item.title}
               description={item.description}
               price={item.price}
-              image={{
-                src: 'https://placehold.co/600x400.png',
-                alt: item.title,
-                aiHint: 'prayer platter' // A default hint, can be improved
-              }}
+              image={item.image}
             />
           ))}
         </div>
