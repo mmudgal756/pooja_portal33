@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
@@ -85,13 +85,17 @@ export default function BookingForm({ serviceTitle, servicePrice }) {
       </div>
       <div className="grid gap-2">
         <Label htmlFor="location">Location</Label>
-        <Input 
-            id="location" 
-            placeholder="Enter your address"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required 
-        />
+        <div className="relative">
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input 
+                id="location" 
+                placeholder="Enter your address"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                required 
+                className="pl-10"
+            />
+        </div>
       </div>
       <div className="grid gap-2">
         <Label htmlFor="phone">Phone Number</Label>
