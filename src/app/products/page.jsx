@@ -31,6 +31,36 @@ const samagriItems = [
       aiHint: 'incense cones'
     },
   },
+  {
+    title: 'Pure Ganga Jal',
+    description: 'Sacred water from the Ganges, essential for purification rituals and offerings.',
+    price: '₹99',
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Ganga Jal in a bottle',
+      aiHint: 'holy water'
+    },
+  },
+  {
+    title: 'Brass Diya Set',
+    description: 'Set of two beautifully crafted brass diyas to illuminate your sacred space.',
+    price: '₹299',
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Brass oil lamps',
+      aiHint: 'oil lamps'
+    },
+  },
+  {
+    title: 'Puja Thali Set',
+    description: 'A complete puja thali set in decorative steel, including all necessary items.',
+    price: '₹799',
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Decorative Puja Thali',
+      aiHint: 'prayer platter'
+    },
+  },
 ];
 
 
