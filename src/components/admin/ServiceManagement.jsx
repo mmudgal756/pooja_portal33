@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import {
@@ -16,30 +16,12 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Edit, Trash, PlusCircle } from "lucide-react"
-
-const initialServices = [
-  {
-    title: 'Satyanarayan Katha',
-    description: 'A sacred ritual to honor Lord Vishnu, bringing peace and prosperity to your home.',
-    price: 5100,
-  },
-  {
-    title: 'Mundan Sanskar',
-    description: 'The traditional head-shaving ceremony for your child, performed by our experienced pandits.',
-    price: 3100,
-  },
-  {
-    title: 'Janeu Sanskar',
-    description: 'The sacred thread ceremony (Upanayana) marking the journey into spiritual studies.',
-    price: 4100,
-  },
-];
+import { Edit, Trash, PlusCircle, Loader2 } from "lucide-react"
+import { getServices, addService, updateService, deleteService } from "@/services/pujaServices"
 
 function ServiceForm({ service, onSave, onCancel }) {
   const [formData, setFormData] = useState(service || { title: '', description: '', price: '' });
@@ -77,22 +59,49 @@ function ServiceForm({ service, onSave, onCancel }) {
 }
 
 export default function ServiceManagement() {
-  const [services, setServices] = useState(initialServices);
+  const [services, setServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingService, setEditingService] = useState(null);
 
-  const handleSave = (serviceData) => {
-    if (editingService) {
-      setServices(services.map(s => s.title === editingService.title ? serviceData : s));
-    } else {
-      setServices([...services, { ...serviceData, price: Number(serviceData.price) }]);
+  useEffect(() => {
+    async function loadServices() {
+      try {
+        const data = await getServices();
+        setServices(data);
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
-    setIsDialogOpen(false);
-    setEditingService(null);
+    loadServices();
+  }, []);
+
+  const handleSave = async (serviceData) => {
+    try {
+      if (editingService) {
+        const updated = await updateService(editingService.id, { ...serviceData, price: Number(serviceData.price) });
+        setServices(services.map(s => s.id === editingService.id ? updated : s));
+      } else {
+        const newService = await addService({ ...serviceData, price: Number(serviceData.price) });
+        setServices([...services, newService]);
+      }
+    } catch(error) {
+        console.error("Failed to save service:", error)
+    } finally {
+        setIsDialogOpen(false);
+        setEditingService(null);
+    }
   };
 
-  const handleDelete = (serviceTitle) => {
-    setServices(services.filter(s => s.title !== serviceTitle));
+  const handleDelete = async (serviceId) => {
+    try {
+        await deleteService(serviceId);
+        setServices(services.filter(s => s.id !== serviceId));
+    } catch(error) {
+        console.error("Failed to delete service:", error)
+    }
   };
   
   const handleAddNew = () => {
@@ -118,31 +127,37 @@ export default function ServiceManagement() {
         </Button>
       </CardHeader>
       <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Title</TableHead>
-              <TableHead>Price</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {services.map((service) => (
-              <TableRow key={service.title}>
-                <TableCell className="font-medium">{service.title}</TableCell>
-                <TableCell>₹{service.price}</TableCell>
-                <TableCell className="text-right">
-                   <Button variant="ghost" size="icon" onClick={() => handleEdit(service)}>
-                    <Edit className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon" onClick={() => handleDelete(service.title)}>
-                    <Trash className="h-4 w-4" />
-                  </Button>
-                </TableCell>
+        {isLoading ? (
+          <div className="flex justify-center items-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Title</TableHead>
+                <TableHead>Price</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {services.map((service) => (
+                <TableRow key={service.id}>
+                  <TableCell className="font-medium">{service.title}</TableCell>
+                  <TableCell>₹{service.price}</TableCell>
+                  <TableCell className="text-right">
+                     <Button variant="ghost" size="icon" onClick={() => handleEdit(service)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon" onClick={() => handleDelete(service.id)}>
+                      <Trash className="h-4 w-4" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </CardContent>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent>
