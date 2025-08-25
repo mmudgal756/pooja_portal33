@@ -12,7 +12,7 @@ export default function Chatbot() {
                 <Button
                     variant="default"
                     size="icon"
-                    className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg"
+                    className="fixed bottom-20 right-6 h-14 w-14 rounded-full shadow-lg z-50"
                 >
                     <MessageSquare className="h-6 w-6" />
                     <span className="sr-only">Open Chat</span>
