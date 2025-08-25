@@ -1,5 +1,6 @@
 import PujaServiceCard from '@/components/shared/PujaServiceCard';
 import SamagriCard from '@/components/shared/SamagriCard';
+import PujaQuestion from '@/components/shared/PujaQuestion';
 
 const pujaServices = [
   {
@@ -91,6 +92,14 @@ export default function Home() {
             <PujaServiceCard key={index} {...service} />
           ))}
         </div>
+      </section>
+
+      <section className="mb-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 font-headline">Ask a Question</h2>
+          <p className="text-center text-muted-foreground max-w-2xl mx-auto">Have a question about a puja or ritual? Our AI assistant can help.</p>
+        </div>
+        <PujaQuestion />
       </section>
 
       <section>
