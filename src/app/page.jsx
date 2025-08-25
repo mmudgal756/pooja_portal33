@@ -8,7 +8,7 @@ const pujaServices = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Satyanarayan Katha setup',
-      aiHint: 'hindu ritual'
+      aiHint: 'hindu ceremony'
     },
   },
   {
@@ -17,7 +17,7 @@ const pujaServices = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Mundan ceremony',
-      aiHint: 'hindu tradition'
+      aiHint: 'baby haircut'
     },
   },
   {
@@ -48,7 +48,7 @@ const samagriItems = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Havan Samagri',
-      aiHint: 'sacred offerings'
+      aiHint: 'fire ritual'
     },
   },
   {
@@ -58,7 +58,7 @@ const samagriItems = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Agarbatti sticks',
-      aiHint: 'aromatic incense'
+      aiHint: 'incense sticks'
     },
   },
   {
@@ -68,7 +68,7 @@ const samagriItems = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Dhoop Batti cones',
-      aiHint: 'fragrant cones'
+      aiHint: 'incense cones'
     },
   },
 ];
