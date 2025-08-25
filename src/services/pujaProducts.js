@@ -1,3 +1,4 @@
+
 // This is a mock service file. In a real application, this would be
 // replaced with actual API calls to a backend.
 
@@ -8,7 +9,7 @@ let products = [
     description: 'A complete kit with all essential items for performing a sacred Havan at home.',
     price: 499,
     image: {
-      src: './src/assets/images/HavanSamagriKit.png',
+      src: 'https://placehold.co/600x400.png',
       alt: 'Havan Samagri Kit',
       aiHint: 'havan samagri'
     }
