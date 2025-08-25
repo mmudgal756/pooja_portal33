@@ -5,6 +5,7 @@ const pujaServices = [
   {
     title: 'Satyanarayan Katha',
     description: 'A sacred ritual to honor Lord Vishnu, bringing peace and prosperity to your home.',
+    price: 5100,
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Satyanarayan Katha setup',
@@ -14,6 +15,7 @@ const pujaServices = [
   {
     title: 'Mundan Sanskar',
     description: 'The traditional head-shaving ceremony for your child, performed by our experienced pandits.',
+    price: 3100,
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Mundan ceremony',
@@ -23,6 +25,7 @@ const pujaServices = [
   {
     title: 'Janeu Sanskar',
     description: 'The sacred thread ceremony (Upanayana) marking the journey into spiritual studies.',
+    price: 4100,
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Janeu ceremony',
@@ -32,6 +35,7 @@ const pujaServices = [
   {
     title: 'Grah Pravesh Pooja',
     description: 'A housewarming ceremony to purify your new home and invite blessings for happiness and prosperity.',
+    price: 7100,
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Grah Pravesh Pooja',
