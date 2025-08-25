@@ -3,6 +3,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
 import { CartProvider } from '@/context/CartContext';
+import Chatbot from '@/components/shared/Chatbot';
 
 export const metadata = {
   title: 'Puja Portal',
@@ -25,6 +26,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1 pt-20 pb-16">{children}</main>
             <Footer />
+            <Chatbot />
           </div>
           <Toaster />
         </CartProvider>
