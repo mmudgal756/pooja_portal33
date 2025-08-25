@@ -2,6 +2,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
+import { CartProvider } from '@/context/CartContext';
 
 export const metadata = {
   title: 'Puja Portal',
@@ -19,12 +20,14 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <div className="relative flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1 pt-20 pb-16">{children}</main>
-          <Footer />
-        </div>
-        <Toaster />
+        <CartProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <main className="flex-1 pt-20 pb-16">{children}</main>
+            <Footer />
+          </div>
+          <Toaster />
+        </CartProvider>
       </body>
     </html>
   );

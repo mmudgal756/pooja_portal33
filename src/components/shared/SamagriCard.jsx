@@ -1,9 +1,19 @@
+"use client";
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShoppingCart } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 export default function SamagriCard({ title, description, price, image }) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    const priceValue = parseFloat(price.replace('₹', ''));
+    addToCart({ title, price: priceValue, image, description });
+  };
+
   return (
     <Card className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
       <CardHeader>
@@ -24,7 +34,7 @@ export default function SamagriCard({ title, description, price, image }) {
       </CardContent>
       <CardFooter className="flex justify-between items-center">
         <p className="text-lg font-bold text-primary">{price}</p>
-        <Button variant="outline">
+        <Button variant="outline" onClick={handleAddToCart}>
           <ShoppingCart className="mr-2 h-4 w-4" />
           Add to Cart
         </Button>
