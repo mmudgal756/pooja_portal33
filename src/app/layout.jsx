@@ -2,7 +2,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Toaster } from '@/components/ui/toaster';
-import { CartProvider } from '@/context/CartContext';
+import { AppProviders } from '@/context/AppProviders';
 import Chatbot from '@/components/shared/Chatbot';
 
 export const metadata = {
@@ -21,7 +21,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        <CartProvider>
+        <AppProviders>
           <div className="relative flex min-h-screen flex-col">
             <Header />
             <main className="flex-1 pt-20 pb-16">{children}</main>
@@ -29,7 +29,7 @@ export default function RootLayout({
             <Chatbot />
           </div>
           <Toaster />
-        </CartProvider>
+        </AppProviders>
       </body>
     </html>
   );
