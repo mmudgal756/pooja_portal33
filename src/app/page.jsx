@@ -8,7 +8,7 @@ const pujaServices = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Satyanarayan Katha setup',
-      aiHint: 'hindu ceremony'
+      aiHint: 'hindu ritual'
     },
   },
   {
@@ -17,7 +17,7 @@ const pujaServices = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Mundan ceremony',
-      aiHint: 'baby haircut'
+      aiHint: 'hindu tradition'
     },
   },
   {
@@ -27,6 +27,15 @@ const pujaServices = [
       src: 'https://placehold.co/600x400.png',
       alt: 'Janeu ceremony',
       aiHint: 'sacred thread'
+    },
+  },
+  {
+    title: 'Grah Pravesh Pooja',
+    description: 'A housewarming ceremony to purify your new home and invite blessings for happiness and prosperity.',
+    image: {
+      src: 'https://placehold.co/600x400.png',
+      alt: 'Grah Pravesh Pooja',
+      aiHint: 'housewarming ceremony'
     },
   },
 ];
@@ -39,7 +48,7 @@ const samagriItems = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Havan Samagri',
-      aiHint: 'fire ritual'
+      aiHint: 'sacred offerings'
     },
   },
   {
@@ -49,7 +58,7 @@ const samagriItems = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Agarbatti sticks',
-      aiHint: 'incense sticks'
+      aiHint: 'aromatic incense'
     },
   },
   {
@@ -59,7 +68,7 @@ const samagriItems = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'Dhoop Batti cones',
-      aiHint: 'incense cones'
+      aiHint: 'fragrant cones'
     },
   },
 ];
