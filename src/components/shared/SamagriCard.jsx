@@ -33,7 +33,7 @@ export default function SamagriCard({ title, description, price, image }) {
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center">
-        <p className="text-lg font-bold text-primary">{price}</p>
+        <p className="text-lg font-bold text-primary">₹{price}</p>
         <Button variant="outline" onClick={handleAddToCart}>
           <ShoppingCart className="mr-2 h-4 w-4" />
           Add to Cart
