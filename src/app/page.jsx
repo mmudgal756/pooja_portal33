@@ -68,7 +68,7 @@ const pujaServices = [
     image: {
       src: 'https://placehold.co/600x400.png',
       alt: 'A person performing a pooja for their new car.',
-      aiHint: 'car blessing'
+      aiHint: 'vehicle pooja'
     },
   },
 ];
